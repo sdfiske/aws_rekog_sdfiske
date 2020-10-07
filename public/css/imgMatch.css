@@ -1,0 +1,34 @@
+.srcImgCol {
+    width: 260px;
+    text-align: left;
+}
+.srcNameCol {
+    width: 200px;
+    text-align: left;
+}
+.srcImgClass {
+    width: 250px;
+    background-size: contain;
+}
+.imgCol {
+    width: 110px;
+    text-align: left;
+}
+.nameCol {
+    width: 200px;
+    text-align: left;
+}
+.imgClass {
+    width: 100px;
+    background-size: contain;
+}
+.scoreCol {
+    width: 100px;
+    text-align: left;
+}
+.rowImgEven {
+    background-color:lightgray;
+}
+.rowSep {
+    height: 25px;
+}

@@ -1,0 +1,37 @@
+  var config = require('./config');
+  var matchRekog = require('./matchRekog');
+
+  var express = require('express');
+  var app = express();
+  app.use(express.static('public'));
+
+  app.get('/api/matchImages', async (req, res) => {
+    var colName = config.collectionName;
+
+    try {
+      await matchRekog.searchFaces(colName).then(function (data) {
+        // Wait until calls to AWS Rekogition searchFaces complete to call getimageCompList
+        // to get JSON format image match data.
+        setTimeout(function() {
+          data = matchRekog.getimageCompList();
+          if (data.length > 0) {
+            res.json(data);
+            console.log("\nindex.js AFTER CALL matchRekog.getimageCompList data: " + JSON.stringify(data));
+          }            
+        }, 4000);
+      });
+
+      // alternate AWS Rekognition matching using searchFacesByImage function instead of searchFaces
+      // await matchRekog.searchFacesByImage(colName).then(function (data) {
+    } catch (err) {
+      console.log('/api/matchImages error: ' + err.message);
+      res.sendStatus(500);
+    };
+
+    return;
+  });
+
+  app.listen(5555, function () {
+    console.log('Listening on port 5555!');
+  });
+
